@@ -16,6 +16,7 @@ export default function Screen_02() {
   const [activeDot, setActiveDot] = useState(0); 
   const navigation = useNavigation();
   const [searchFocused, setSearchFocused] = useState(false);
+  const [searchText, setSearchText] = useState(''); // Tạo state để lưu từ khoá tìm kiếm
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +37,15 @@ export default function Screen_02() {
   const filterProducts = (categoryId, categoryName) => {
     setSelectedCategoryId(categoryId);
     const filtered = products.filter(product => product.name === categoryName);
+    setFilteredProducts(filtered);
+  };
+
+  // Filter products based on search input
+  const filterProductsByName = (text) => {
+    setSearchText(text);
+    const filtered = products.filter(product =>
+      product.name.toLowerCase().includes(text.toLowerCase())
+    );
     setFilteredProducts(filtered);
   };
 
@@ -72,6 +82,8 @@ export default function Screen_02() {
               style={styles.searchInput} 
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
+              value={searchText}  // Bind giá trị searchText vào input
+              onChangeText={filterProductsByName}  // Gọi hàm lọc mỗi khi người dùng nhập
             />
           </View>
           <TouchableOpacity style={styles.sortButton}>
@@ -97,8 +109,7 @@ export default function Screen_02() {
                 category.id === "3" && { backgroundColor: '#FFE4B5' },
                 { borderColor: selectedCategoryId === category.id ? 
                   (category.id === "1" ? '#c478f0' : category.id === "2" ? '#81a7de' : '#fccd7c') : 'transparent' }
-              ]}
-            >
+              ]}>
               <Image
                 source={{ uri: category.icon }}
                 style={styles.categoryIcon}
