@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Modal } fro
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Screen_01() {
+export default function LoginScreen() {
   const navigation = useNavigation();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
