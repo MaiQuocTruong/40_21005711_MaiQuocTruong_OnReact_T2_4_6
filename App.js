@@ -15,7 +15,7 @@ export default function App() {
   return (
     <CartProvider>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Electronics">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
